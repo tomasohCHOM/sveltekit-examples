@@ -1,10 +1,10 @@
-<script lang="ts">
+<script>
 	const links = [
-		{ href: '/tictactoe', title: 'Tic-Tac-Toe', desc: 'finished example from the workshop' },
-		{ href: '/devdle', title: 'Devdle', desc: 'fully animated programming-based Wordle' },
-		{ href: '/pokedex', title: 'Pokedex', desc: 'example fetching data from the PokéAPI' },
-		{ href: '/daisy', title: 'Daisy', desc: 'landing & documentation pages for a SaaS company' },
-		{ href: '/3d', title: '3D', desc: 'first-person scene using threejs and threlte' }
+		{ href: "/tictactoe", title: "Tic-Tac-Toe", desc: "finished example from the workshop" },
+		{ href: "/devdle", title: "Devdle", desc: "fully animated programming-based Wordle" },
+		{ href: "/pokedex", title: "Pokedex", desc: "example fetching data from the PokéAPI" },
+		{ href: "/daisy", title: "Daisy", desc: "landing & documentation pages for a SaaS company" },
+		{ href: "/3d", title: "3D", desc: "first-person scene using threejs and threlte" }
 	];
 </script>
 
@@ -16,7 +16,7 @@
 	<title>FullyHacks 2025 SvelteKit Workshop</title>
 </svelte:head>
 
-<main class="py-16 px-8 md:px-16 md:py-24 flex flex-col gap-4 md:gap-8">
+<main class="py-16 px-8 md:px-16 md:py-24 flex flex-col gap-6 md:gap-8 max-w-[1536px] mx-auto">
 	<h1 class="text-3xl md:text-5xl font-semibold text-gray-900">SvelteKit Examples</h1>
 	<p class="md:text-lg">
 		A website to showcase all the cool projects you can build with <a
@@ -24,7 +24,7 @@
 			target="_blank">SvelteKit</a
 		>!
 	</p>
-	<ul class="list-disc ml-8">
+	<ul class="text-sm md:text-[1rem] list-disc ml-4 md:ml-8">
 		{#each links as link}
 			<li>
 				<a href={link.href}>
@@ -34,18 +34,23 @@
 			</li>
 		{/each}
 	</ul>
-	<p>
+	<p class="text-sm md:text-[1rem]">
 		For more resources, check out <a href="https://svelte.dev/" target="_blank">svelte.dev</a>
 		and our
 		<a href="https://github.com/acmcsufoss/fullypack_sveltekit" target="_blank"
 			>SvelteKit Fullypacks</a
 		> template!
 	</p>
+	<a
+		href="https://github.com/tomasohCHOM/sveltekit-examples"
+		target="_blank"
+		class="max-w-max text-sm md:text-[1rem]">GitHub Repo</a
+	>
 </main>
 
 <style>
 	* {
-		font-family: 'Inter', sans-serif;
+		font-family: "Inter", sans-serif;
 	}
 
 	a {
