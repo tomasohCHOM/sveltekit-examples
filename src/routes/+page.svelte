@@ -1,6 +1,6 @@
 <script>
 	const links = [
-		{ href: "/tictactoe", title: "Tic-Tac-Toe", desc: "finished example from the workshop" },
+		{ href: "/tictactoe", title: "Tic Tac Toe", desc: "finished example from the workshop" },
 		{ href: "/devdle", title: "Devdle", desc: "fully animated programming-based Wordle" },
 		{ href: "/pokedex", title: "Pokedex", desc: "example fetching data from the PokéAPI" },
 		{ href: "/daisy", title: "Daisy", desc: "landing & documentation pages for a SaaS company" },

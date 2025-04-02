@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Constant variables
-	const ROWS = 3;
-	const COLS = 3;
+	const CROSS = "X";
+	const CIRCLE = "O";
 
 	// State variables
 	let board = $state([
@@ -13,8 +13,8 @@
 	let isGameOver = $state(false);
 	let winner = $state("");
 
+	// Checks if either player has won the game (or if it resulted in a tie)
 	// Does not take any parameters since we are using the board variable directly
-	// Checks if either player has won the game
 	function checkBoard() {
 		// Check rows and columns
 		for (let i = 0; i < 3; i++) {
@@ -54,9 +54,9 @@
 			return;
 		}
 		if (playerTurn === 0) {
-			board[rowIndex][colIndex] = "X";
+			board[rowIndex][colIndex] = CROSS;
 		} else {
-			board[rowIndex][colIndex] = "O";
+			board[rowIndex][colIndex] = CIRCLE;
 		}
 		checkBoard();
 		if (isGameOver) {
@@ -64,7 +64,22 @@
 		}
 		playerTurn ^= 1;
 	}
+
+	function resetGame() {
+		board = [
+			["", "", ""],
+			["", "", ""],
+			["", "", ""]
+		];
+		playerTurn = 0;
+		isGameOver = false;
+		winner = "";
+	}
 </script>
+
+<svelte:head>
+	<title>Tic Tac Toe</title>
+</svelte:head>
 
 <main>
 	<h1>Tic Tac Toe</h1>
@@ -74,13 +89,19 @@
 				<div class="row">
 					{#each row as cell, colIndex}
 						<button
+							class="cell"
 							class:border-top={rowIndex !== 0}
-							class:border-bottom={rowIndex !== ROWS - 1}
+							class:border-bottom={rowIndex !== 2}
 							class:border-left={colIndex !== 0}
-							class:border-right={colIndex !== COLS - 1}
+							class:border-right={colIndex !== 2}
 							onclick={() => handleCellClick(rowIndex, colIndex)}
 						>
-							{cell}
+							{#if cell !== ""}
+								<img
+									src="/tictactoe/{cell === CROSS ? 'cross' : 'circle'}.svg?t=${Date.now()}"
+									alt="{cell} Icon"
+								/>
+							{/if}
 						</button>
 					{/each}
 				</div>
@@ -98,6 +119,9 @@
 			Player {playerTurn}'s turn
 		{/if}
 	</p>
+	{#if isGameOver}
+		<button class="reset-btn" onclick={resetGame}>Play Again!</button>
+	{/if}
 </main>
 
 <style>
@@ -119,6 +143,10 @@
 		margin-bottom: 1rem;
 	}
 
+	button {
+		cursor: pointer;
+	}
+
 	.board {
 		display: flex;
 		flex-direction: column;
@@ -128,15 +156,28 @@
 		display: flex;
 	}
 
-	button {
-		width: 6rem;
-		height: 6rem;
+	.cell {
+		width: 5rem;
+		height: 5rem;
 		font-size: 1.5rem;
 		font-weight: bold;
 		border-style: solid;
 		border-color: #1a202c;
 		background: none;
 		cursor: pointer;
+	}
+
+	.cell > img {
+		width: 3rem;
+		margin-inline: auto;
+	}
+
+	.reset-btn {
+		font-weight: 600;
+		padding: 0.25rem 5rem;
+		border-radius: 0.5rem;
+		background-color: rgb(68, 133, 225);
+		color: white;
 	}
 
 	.border-top {
@@ -153,5 +194,12 @@
 
 	.border-right {
 		border-right-width: 2px;
+	}
+
+	@media screen and (min-width: 768px) {
+		.cell {
+			width: 6rem;
+			height: 6rem;
+		}
 	}
 </style>
