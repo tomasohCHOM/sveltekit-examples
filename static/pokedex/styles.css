@@ -2,4 +2,16 @@
 
 :root {
 	font-family: "Lato", sans-serif;
+	--color-background: #ffffff;
+	--color-foreground: #1f2125;
+
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-background: #1f2125;
+		--color-foreground: #ffffff;
+	}
 }
