@@ -1,11 +1,10 @@
 <script lang="ts">
-	// import { WORD_REVEAL_ANIMATION_DELAY } from "$lib/constants/values";
-
 	export let currentGuess: string;
 	export let guesses: string[];
 	export let answer: string;
 	export let isGameOver: boolean;
 	export let handleSubmit: () => void;
+
 	const keys = ["qwertyuiop", "asdfghjkl", "<zxcvbnm>"];
 
 	/**

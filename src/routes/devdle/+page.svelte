@@ -1,5 +1,4 @@
 <script lang="ts">
-	import "./styles.css";
 	import { browser } from "$app/environment";
 	import { onDestroy, onMount } from "svelte";
 	import { WIN_MESSAGES } from "$lib/devdle/constants/messages";
@@ -128,7 +127,7 @@
 	};
 
 	const handleKeyType = (event: KeyboardEvent) => {
-		if (isGameOver) return;
+		if (isGameOver || event.ctrlKey) return;
 		if (event.key === "Backspace") currentGuess = currentGuess.slice(0, -1);
 		else if (event.key === "Enter") handleSubmit();
 		if (currentGuess.length === 5) return;
@@ -143,7 +142,7 @@
 		isGameOver = false;
 		isError = false;
 		gameOverMessage = "";
-		if (browser) window.addEventListener("keydown", handleKeyType);
+		if (browser) window.addEventListener("keypress", handleKeyType);
 		secretIndex = Math.floor(Math.random() * ANSWERS_LIST.length);
 		secret = ANSWERS_LIST[secretIndex];
 	};
@@ -151,6 +150,7 @@
 
 <svelte:head>
 	<title>Devdle</title>
+	<link rel="stylesheet" href="/devdle/styles.css" />
 </svelte:head>
 
 <main>
