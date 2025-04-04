@@ -1,37 +1,42 @@
 <script lang="ts">
 	import { WORD_REVEAL_ANIMATION_DELAY } from "$lib/devdle/constants/values";
 
-	const NUM_ROWS = 6;
-	const NUM_COLS = 5;
-
 	export let guesses: string[];
 	export let colorsFromGuesses: string[];
 	export let currentGuess: string;
 	export let numAttempts: number;
 	export let isError: boolean;
-	// let colorsFromGuesses: string[] = [];
 
-	function convertColorToClass(r: number, c: number): string {
-		switch (colorsFromGuesses[r][c]) {
-			case "G":
-				return "correct";
-			case "Y":
-				return "present";
-			case "B":
-				return "absent";
-			default:
-				break;
-		}
-		return "";
+	// Game board configuration
+	const BOARD_SIZE = {
+		ROWS: 6,
+		COLS: 5
+	};
+
+	// Color mappings for clarity
+	const COLOR_CLASS = {
+		G: "correct",
+		Y: "present",
+		B: "absent"
+	};
+
+	/**
+	 * Convert color code to CSS class name
+	 */
+	function getColorClass(row: number, col: number): string {
+		if (!colorsFromGuesses[row]) return "";
+
+		const colorCode = colorsFromGuesses[row][col];
+		return COLOR_CLASS[colorCode as keyof typeof COLOR_CLASS] || "";
 	}
 </script>
 
 <div class="board">
-	{#each { length: NUM_ROWS } as _, r}
+	{#each Array(BOARD_SIZE.ROWS) as _, r}
 		<div class="board-row">
-			{#each { length: NUM_COLS } as _, c}
+			{#each Array(BOARD_SIZE.COLS) as _, c}
 				<div
-					class="board-cell {guesses[r] !== undefined ? convertColorToClass(r, c) : ''}"
+					class="board-cell {guesses[r] !== undefined ? getColorClass(r, c) : ''}"
 					class:border-active={r === guesses.length && currentGuess[c] !== undefined}
 					class:shake={r === guesses.length && isError === true}
 					style="--order: {c}; --win-delay: {WORD_REVEAL_ANIMATION_DELAY};"

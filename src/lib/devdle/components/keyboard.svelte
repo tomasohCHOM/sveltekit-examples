@@ -5,74 +5,79 @@
 	export let isGameOver: boolean;
 	export let handleSubmit: () => void;
 
+	// Keyboard layout
 	const keys = ["qwertyuiop", "asdfghjkl", "<zxcvbnm>"];
 
+	// Special key mappings
+	const specialKeys = {
+		"<": { display: "DEL", action: () => (currentGuess = currentGuess.slice(0, -1)) },
+		">": { display: "ENTER", action: handleSubmit }
+	};
+
 	/**
-	 * Algorithm to get the corresponding color status of a single key in
-	 * the keyboard, prioritizing green over yellow, and yellow over gray.
-	 * @param letter
+	 * Get color status for a key based on previous guesses
+	 * Priority: correct (green) > present (yellow) > absent (gray)
 	 */
-	const processKeyColors = (letter: string) => {
-		let result: string = "";
+	function getKeyColor(letter: string): string {
+		let status = ""; // No color initally
 		for (const guess of guesses) {
-			if (guess.includes(letter)) {
-				if (answer.includes(letter)) {
-					result = "present";
-					for (let i = 0; i < guess.length; i++) {
-						if (guess[i] === letter && guess[i] === answer[i]) {
-							result = "correct";
-							return result;
-						}
+			if (!guess.includes(letter)) continue;
+			if (answer.includes(letter)) {
+				// Mark as present (yellow) initially
+				status = "present";
+				// Check if it's in the correct position in any guess
+				for (let i = 0; i < guess.length; i++) {
+					if (guess[i] === letter && answer[i] === letter) {
+						return "correct"; // Green has highest priority, return immediately
 					}
-				} else {
-					result = "absent";
 				}
+			} else {
+				status = "absent";
 			}
 		}
-		return result;
-	};
+		return status;
+	}
 
-	const clickKey = (key: string) => {
+	function handleKeyClick(key: string): void {
 		if (isGameOver) return;
-		if (key == "<") {
-			currentGuess = currentGuess.slice(0, -1);
-			return;
-		} else if (key == ">") {
-			handleSubmit();
+		// Handle special keys
+		if (key in specialKeys) {
+			specialKeys[key as keyof typeof specialKeys].action();
 			return;
 		}
+		// Don't add more letters if already 5 chars
 		if (currentGuess.length === 5) return;
-		currentGuess = currentGuess + key.toLowerCase();
-	};
+		// Add the letter to the current guess
+		currentGuess += key.toLowerCase();
+	}
+
+	function getKeyDisplay(key: string): string {
+		return key in specialKeys
+			? specialKeys[key as keyof typeof specialKeys].display
+			: key.toUpperCase();
+	}
 </script>
 
-<section class="disable-double-tap-zoom">
+<div class="keyboard disable-double-tap-zoom">
 	<br />
 	{#key guesses}
-		{#each keys as key}
+		{#each keys as keyRow}
 			<div class="row">
-				{#each key as letter}
+				{#each keyRow as letter}
 					<button
-						class="keyboard-key .disable-double-tap-zoom {processKeyColors(letter)}"
-						on:click={() => {
-							clickKey(letter);
-						}}
-						>{#if letter === "<"}
-							DEL
-						{:else if letter === ">"}
-							ENTER
-						{:else}
-							{letter.toUpperCase()}
-						{/if}
+						on:click={() => handleKeyClick(letter)}
+						class="keyboard-key .disable-double-tap-zoom {getKeyColor(letter)}"
+					>
+						{getKeyDisplay(letter)}
 					</button>
 				{/each}
 			</div>
 		{/each}
 	{/key}
-</section>
+</div>
 
 <style>
-	section {
+	.keyboard {
 		padding-block-end: 1.5rem;
 		display: flex;
 		align-items: center;
@@ -82,7 +87,7 @@
 		gap: 0.25rem;
 	}
 
-	section .row {
+	.keyboard > .row {
 		display: flex;
 		gap: 0.25rem;
 	}
