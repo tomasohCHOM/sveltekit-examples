@@ -67,7 +67,7 @@
 </script>
 
 <svelte:head>
-	<title>Tic Tac Toe</title>
+	<title>Tic Tac Toe | SvelteKit Examples</title>
 </svelte:head>
 
 <main>

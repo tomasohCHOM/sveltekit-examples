@@ -228,7 +228,7 @@
 </script>
 
 <svelte:head>
-	<title>Devdle</title>
+	<title>Devdle | SvelteKit Examples</title>
 	<link rel="stylesheet" href="/devdle/styles.css" />
 </svelte:head>
 
