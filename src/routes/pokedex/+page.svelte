@@ -31,17 +31,17 @@
 </script>
 
 <section class="grid gap-8 p-4">
-	<h1 class="text-2xl md:text-4xl font-bold text-center">Pokédex</h1>
+	<h1 class="text-center text-2xl font-bold md:text-4xl">Pokédex</h1>
 	{#if data.error}
-		<p class="text-lg text-center">{data.error}</p>
+		<p class="text-center text-lg">{data.error}</p>
 	{:else}
 		<PokeGrid {pokemon} />
 	{/if}
 	<button
 		onclick={loadMorePokemon}
 		disabled={loading || !nextPage}
-		class="bg-sky-500 hover:bg-sky-400 transition w-[min(20rem,_90%)]
-    cursor-pointer py-2 px-4 rounded-lg text-white mx-auto"
+		class="mx-auto w-[min(20rem,_90%)] cursor-pointer rounded-lg
+    bg-sky-500 px-4 py-2 text-white transition hover:bg-sky-400"
 	>
 		{#if loading}
 			Loading...

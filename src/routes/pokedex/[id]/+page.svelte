@@ -3,8 +3,8 @@
 	import { zeroPad } from "$lib/pokedex/utils.js";
 
 	let { data } = $props();
-	let pokemonId = data.pokemonId;
-	let pokemon = data.pokemonInfo;
+	const pokemonId = $derived(data.pokemonId);
+	const pokemon = $derived(data.pokemonInfo);
 
 	const typeColors = new Map<string, string>([
 		["normal", "bg-[#A8A77A]"],
@@ -28,23 +28,23 @@
 	]);
 </script>
 
-<section class="max-w-[768px] mx-auto">
+<section class="mx-auto max-w-[768px]">
 	{#if data.error}
-		<p class="text-lg text-center">{data.error}</p>
+		<p class="text-center text-lg">{data.error}</p>
 	{:else}
-		<div class="grid md:grid-cols-2 gap-4">
+		<div class="grid gap-4 md:grid-cols-2">
 			<div
-				class="flex flex-col gap-4 items-center justify-center md:pr-8
-        md:border-r-2 border-gray-300"
+				class="flex flex-col items-center justify-center gap-4 border-gray-300
+        md:border-r-2 md:pr-8"
 			>
-				<span class="font-bold uppercase text-xl md:text-3xl">{pokemon.name}</span>
+				<span class="text-xl font-bold uppercase md:text-3xl">{pokemon.name}</span>
 				<img
 					src="{pokemonImagePath + zeroPad(pokemonId, 3)}.png"
 					alt="Pokemon {pokemonId}"
-					class="w-64 p-4 border-2 rounded-lg border-gray-300"
+					class="w-64 rounded-lg border-2 border-gray-300 p-4"
 				/>
 			</div>
-			<div class="text-lg flex flex-col gap-2 md:gap-4 w-64 mx-auto md:max-w-full md:mx-0">
+			<div class="mx-auto flex w-64 flex-col gap-2 text-lg md:mx-0 md:max-w-full md:gap-4">
 				<div class="flex flex-col gap-2">
 					<p><span class="font-semibold">Height:</span> {pokemon.height}</p>
 					<p><span class="font-semibold">Weight:</span> {pokemon.weight}</p>
@@ -53,7 +53,7 @@
 				<div class="flex gap-2">
 					{#each pokemon.types as typeSlot}
 						<span
-							class="px-2 py-0.5 rounded-lg text-white {typeColors.get(typeSlot.type.name) ??
+							class="rounded-lg px-2 py-0.5 text-white {typeColors.get(typeSlot.type.name) ??
 								'bg-black'}">{typeSlot.type.name}</span
 						>
 					{/each}
@@ -71,14 +71,14 @@
 		{#if pokemonId !== 1}
 			<a
 				href="/pokedex/{pokemonId - 1}"
-				class="bg-sky-500 hover:bg-sky-400 transition max-w-max cursor-pointer py-2 px-4 rounded-lg text-white"
+				class="max-w-max cursor-pointer rounded-lg bg-sky-500 px-4 py-2 text-white transition hover:bg-sky-400"
 			>
 				Previous
 			</a>
 		{/if}
 		<a
 			href="/pokedex/{pokemonId + 1}"
-			class="bg-sky-500 hover:bg-sky-400 ml-auto transition max-w-max cursor-pointer py-2 px-4 rounded-lg text-white"
+			class="ml-auto max-w-max cursor-pointer rounded-lg bg-sky-500 px-4 py-2 text-white transition hover:bg-sky-400"
 			>Next</a
 		>
 	</div>

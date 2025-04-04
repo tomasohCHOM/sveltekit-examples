@@ -18,15 +18,15 @@
 	<title>FullyHacks 2025 SvelteKit Workshop</title>
 </svelte:head>
 
-<main class="py-16 px-8 md:px-16 md:py-24 flex flex-col gap-6 md:gap-8 max-w-[1536px] mx-auto">
-	<h1 class="text-3xl md:text-5xl font-semibold text-gray-900">SvelteKit Examples</h1>
+<main class="mx-auto flex max-w-[1536px] flex-col gap-6 px-8 py-16 md:gap-8 md:px-16 md:py-24">
+	<h1 class="text-3xl font-semibold md:text-5xl">SvelteKit Examples</h1>
 	<p class="md:text-lg">
 		A website to showcase all the cool projects you can build with <a
 			href="https://svelte.dev/docs/kit/introduction"
 			target="_blank">SvelteKit</a
 		>!
 	</p>
-	<ul class="text-sm md:text-[1rem] list-disc ml-4 md:ml-8">
+	<ul class="ml-4 list-disc text-sm md:ml-8 md:text-[1rem]">
 		{#each links as link}
 			<li>
 				<a href={link.href}>
@@ -51,6 +51,23 @@
 </main>
 
 <style>
+	:root {
+		--color-background-500: #f8f8f8;
+		--color-background-300: #d1d5dc;
+		--color-foreground: #1f2125;
+
+		background-color: var(--color-background-500);
+		color: var(--color-foreground);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--color-background-500: #1f2125;
+			--color-background-300: #77797a;
+			--color-foreground: #ffffff;
+		}
+	}
+
 	* {
 		font-family: "Inter", sans-serif;
 	}
@@ -58,11 +75,11 @@
 	a {
 		text-decoration: underline;
 		text-underline-offset: 2px;
-		text-decoration-color: #d1d5dc;
+		text-decoration-color: var(--color-background-300);
 		transition: text-decoration-color 150ms ease;
 	}
 
 	a:hover {
-		text-decoration-color: #101828;
+		text-decoration-color: var(--color-foreground);
 	}
 </style>

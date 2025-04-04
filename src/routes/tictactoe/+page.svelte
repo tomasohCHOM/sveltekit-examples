@@ -126,7 +126,6 @@
 	h1 {
 		font-size: 2rem;
 		font-weight: bold;
-		color: #1a202c;
 		margin-bottom: 1rem;
 	}
 
@@ -154,7 +153,6 @@
 		font-size: 1.5rem;
 		font-weight: bold;
 		border-style: solid;
-		border-color: #1a202c;
 		background: none;
 		cursor: pointer;
 	}

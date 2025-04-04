@@ -10,6 +10,6 @@
 </svelte:head>
 
 <Navbar />
-<main class="pt-8 pb-16 max-w-[1280px] mx-auto">
+<main class="mx-auto max-w-[1280px] pt-8 pb-16">
 	{@render children()}
 </main>
