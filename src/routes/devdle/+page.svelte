@@ -17,21 +17,19 @@
 	const validGuesses = new Set<string>(GUESSES_LIST);
 
 	// Game state
-	let secret: string;
-	let secretIndex: number;
-	let guesses: string[] = [];
-	let colorsFromGuesses: string[] = [];
-	let currentGuess: string = "";
-	let numAttempts: number = 0;
-	let isGameOver: boolean = false;
-	let isError: boolean = false;
-	let gameOverMessage: string = "";
+	let secret = $state(selectRandomWord());
+	let guesses: string[] = $state([]);
+	let colorsFromGuesses: string[] = $state([]);
+	let currentGuess = $state("");
+	let numAttempts = $state(0);
+	let isGameOver = $state(false);
+	let isError = $state(false);
+	let gameOverMessage = $state("");
 
 	let popOver: HTMLDivElement;
 
 	onMount(async () => {
 		window.addEventListener("keydown", handleKeyType);
-		secret = selectRandomWord();
 	});
 
 	onDestroy(async () => {
@@ -42,7 +40,7 @@
 	 * Select a random word from the answers list
 	 */
 	function selectRandomWord(): string {
-		secretIndex = Math.floor(Math.random() * ANSWERS_LIST.length);
+		const secretIndex = Math.floor(Math.random() * ANSWERS_LIST.length);
 		return ANSWERS_LIST[secretIndex];
 	}
 
@@ -237,12 +235,12 @@
 <main>
 	<h1>Devdle</h1>
 	<div bind:this={popOver} class="pop-over"></div>
-	<Board bind:guesses bind:colorsFromGuesses bind:currentGuess bind:numAttempts bind:isError />
+	<Board {guesses} {colorsFromGuesses} {currentGuess} {numAttempts} {isError} />
 
 	{#if isGameOver}
-		<button class="game-over-btn" on:click={() => resetGame()}> Generate New Word </button>
+		<button class="game-over-btn" onclick={() => resetGame()}> Generate New Word </button>
 	{/if}
-	<Keyboard bind:isGameOver bind:currentGuess bind:guesses answer={secret} {handleSubmit} />
+	<Keyboard answer={secret} {handleSubmit} bind:guesses bind:currentGuess bind:isGameOver />
 </main>
 
 <style>

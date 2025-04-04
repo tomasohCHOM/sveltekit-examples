@@ -1,9 +1,18 @@
 <script lang="ts">
-	export let currentGuess: string;
-	export let guesses: string[];
-	export let answer: string;
-	export let isGameOver: boolean;
-	export let handleSubmit: () => void;
+	type Props = {
+		currentGuess: string;
+		guesses: string[];
+		answer: string;
+		isGameOver: boolean;
+		handleSubmit: () => void;
+	};
+	let {
+		answer,
+		handleSubmit,
+		guesses = $bindable(),
+		currentGuess = $bindable(),
+		isGameOver = $bindable()
+	}: Props = $props();
 
 	// Keyboard layout
 	const keys = ["qwertyuiop", "asdfghjkl", "<zxcvbnm>"];
@@ -65,7 +74,7 @@
 			<div class="row">
 				{#each keyRow as letter}
 					<button
-						on:click={() => handleKeyClick(letter)}
+						onclick={() => handleKeyClick(letter)}
 						class="keyboard-key .disable-double-tap-zoom {getKeyColor(letter)}"
 					>
 						{getKeyDisplay(letter)}

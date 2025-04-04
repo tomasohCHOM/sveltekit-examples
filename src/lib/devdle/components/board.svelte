@@ -1,11 +1,15 @@
 <script lang="ts">
 	import { WORD_REVEAL_ANIMATION_DELAY } from "$lib/devdle/constants/values";
 
-	export let guesses: string[];
-	export let colorsFromGuesses: string[];
-	export let currentGuess: string;
-	export let numAttempts: number;
-	export let isError: boolean;
+	type Props = {
+		guesses: string[];
+		colorsFromGuesses: string[];
+		currentGuess: string;
+		numAttempts: number;
+		isError: boolean;
+	};
+
+	let { guesses, colorsFromGuesses, currentGuess, numAttempts, isError }: Props = $props();
 
 	// Game board configuration
 	const BOARD_SIZE = {
