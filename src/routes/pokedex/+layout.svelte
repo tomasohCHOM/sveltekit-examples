@@ -13,9 +13,3 @@
 <main class="pt-8 pb-16 max-w-[1280px] mx-auto">
 	{@render children()}
 </main>
-
-<style>
-	* {
-		font-family: "Lato", sans-serif;
-	}
-</style>

@@ -10,6 +10,6 @@ export const load: PageServerLoad = async () => {
 		return { pokemon: data.results, nextPage: data.next, prevPage: data.prev, error: "" };
 	} catch (error) {
 		console.error("Could not fetch pokemon:", error);
-		return { pokemon: [], nextPage: null, prevPage: null, error: "Something wrong occured." };
+		return { pokemon: [], nextPage: null, prevPage: null, error: "Something went wrong." };
 	}
 };
