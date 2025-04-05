@@ -6,7 +6,7 @@
 	<div class="sm:hidden">Menu</div>
 	<div class="hidden gap-8 sm:flex">
 		<a href="/daisy/docs">Documentation</a>
-		<a href="/daisy/about">About</a>
-		<a href="/daisy/about">Community</a>
+		<a href="/daisy">About</a>
+		<a href="/daisy">Community</a>
 	</div>
 </nav>
