@@ -3,5 +3,5 @@
 		<img src="/daisy/logo.svg" alt="Daisy Logo" class="w-8" />
 		<span class="text-lg font-bold">Daisy</span>
 	</a>
-	<span class="text-gray-300">@ 2025 Tomas Oh</span>
+	<span class="text-gray-500 dark:text-gray-300">@ 2025 Tomas Oh</span>
 </footer>
