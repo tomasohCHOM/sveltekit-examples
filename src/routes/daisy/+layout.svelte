@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Footer from "$lib/daisy/components/footer.svelte";
 	import Navbar from "$lib/daisy/components/navbar.svelte";
 
 	let { children } = $props();
@@ -11,3 +12,4 @@
 
 <Navbar />
 {@render children()}
+<!-- <Footer /> -->
