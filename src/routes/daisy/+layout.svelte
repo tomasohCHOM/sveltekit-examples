@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>The Daisy Programming Language</title>
+	<title>The Daisy Programming Language | SvelteKit Examples</title>
 	<link rel="stylesheet" href="/daisy/styles.css" />
 </svelte:head>
 

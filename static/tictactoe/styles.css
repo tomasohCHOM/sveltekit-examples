@@ -1,0 +1,16 @@
+:root {
+	--color-background-500: #f8f8f8;
+	--color-background-300: #d1d5dc;
+	--color-foreground: #1f2125;
+
+	background-color: var(--color-background-500);
+	color: var(--color-foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-background-500: #1f2125;
+		--color-background-300: #77797a;
+		--color-foreground: #ffffff;
+	}
+}

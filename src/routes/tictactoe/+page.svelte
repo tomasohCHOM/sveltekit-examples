@@ -68,6 +68,7 @@
 
 <svelte:head>
 	<title>Tic Tac Toe | SvelteKit Examples</title>
+	<link rel="stylesheet" href="/tictactoe/styles.css" />
 </svelte:head>
 
 <main>

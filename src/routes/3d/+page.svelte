@@ -66,6 +66,10 @@
 	});
 </script>
 
+<svelte:head>
+	<title>3D | SvelteKit Examples</title>
+</svelte:head>
+
 <div class="container" bind:this={canvasContainer}>
 	<div id="blocker" bind:this={blocker}>
 		<div id="instructions" bind:this={instructions}>
