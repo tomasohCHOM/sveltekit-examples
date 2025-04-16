@@ -1,4 +1,6 @@
-# Daisylang Documentation
+---
+title: "Daisy Documentation"
+---
 
 Welcome to the official documentation for **Daisylang**, a simple and expressive programming language.
 
@@ -59,7 +61,7 @@ Daisylang supports both single-line and multi-line comments:
 ```daisy
 # This is a single-line comment
 
-#* This is a 
+#* This is a
    multi-line comment *#
 ```
 
