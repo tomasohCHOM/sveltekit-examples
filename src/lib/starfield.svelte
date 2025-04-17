@@ -8,6 +8,8 @@
 	let mouseY: number = 0;
 	let prevMouseX: number = 0;
 	let prevMouseY: number = 0;
+	let velocityX: number = 0;
+	let velocityY: number = 0;
 	let width: number;
 	let height: number;
 
@@ -22,31 +24,26 @@
 	class Star {
 		x: number;
 		y: number;
-		size: number;
-		speed: number;
-		brightness: number;
+		size: number = 0;
+		speed: number = 0;
+		brightness: number = 0;
 
 		constructor() {
 			this.reset();
 			this.x = Math.random() * width;
 			this.y = Math.random() * height;
-			this.size = Math.random() * (starSizeRange.max - starSizeRange.min) + starSizeRange.min;
-			this.speed = Math.random() * (starSpeedRange.max - starSpeedRange.min) + starSpeedRange.min;
-			this.brightness = Math.random() * 0.8 + 0.2; // Between 0.2 and 1.0
 		}
 
 		reset(): void {
 			this.size = Math.random() * (starSizeRange.max - starSizeRange.min) + starSizeRange.min;
 			this.speed = Math.random() * (starSpeedRange.max - starSpeedRange.min) + starSpeedRange.min;
-			this.brightness = Math.random() * 0.8 + 0.2; // Between 0.2 and 1.0
+			this.brightness = Math.random() * 0.8 + 0.2;
 		}
 
 		update(deltaX: number, deltaY: number): void {
-			// Move star based on mouse movement and star's speed
 			this.x += deltaX * this.speed;
 			this.y += deltaY * this.speed;
 
-			// Wrap around if star goes off screen
 			if (this.x < 0) this.x = width;
 			if (this.x > width) this.x = 0;
 			if (this.y < 0) this.y = height;
@@ -54,7 +51,6 @@
 		}
 
 		draw(): void {
-			// ctx.fillStyle = `rgba(255, 255, 255, ${this.brightness})`;
 			ctx.fillStyle = `rgba(${starRGB}, ${this.brightness})`;
 			ctx.beginPath();
 			ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -70,21 +66,29 @@
 	}
 
 	function animate(): void {
-		// Calculate mouse movement delta
-		const deltaX = -(mouseX - prevMouseX) * 0.05;
-		const deltaY = -(mouseY - prevMouseY) * 0.05;
+		const dx = mouseX - prevMouseX;
+		const dy = mouseY - prevMouseY;
 
-		// Update previous mouse position
-		prevMouseX = mouseX;
-		prevMouseY = mouseY;
+		if (dx == 0 && dy == 0) {
+			const driftStrength = 0.5;
+			velocityX = 0.95;
+			velocityY = 0.95;
 
-		// Clear canvas
+			velocityX = -Math.random() * 0.25 * driftStrength;
+			velocityY = Math.random() * 0.25 * driftStrength;
+		} else {
+			velocityX = -dx * 0.025;
+			velocityY = -dy * 0.025;
+
+			prevMouseX = mouseX;
+			prevMouseY = mouseY;
+		}
+
 		ctx.fillStyle = `rgba(${backgroundRGB}, 1)`;
 		ctx.fillRect(0, 0, width, height);
 
-		// Update and draw stars
 		stars.forEach((star) => {
-			star.update(deltaX, deltaY);
+			star.update(velocityX, velocityY);
 			star.draw();
 		});
 
@@ -95,7 +99,6 @@
 		mouseX = event.clientX;
 		mouseY = event.clientY;
 
-		// Initialize previous position if this is the first movement
 		if (prevMouseX === 0 && prevMouseY === 0) {
 			prevMouseX = mouseX;
 			prevMouseY = mouseY;
@@ -109,8 +112,6 @@
 		if (canvas) {
 			canvas.width = width;
 			canvas.height = height;
-
-			// Recreate stars when canvas is resized
 			initStars();
 		}
 	}
@@ -122,17 +123,13 @@
 		backgroundRGB = darkMode ? "31, 33, 37" : "248, 248, 248";
 		starRGB = darkMode ? "255, 255, 255" : "31, 33, 37";
 
-		// Set initial canvas size
 		resizeCanvas();
 
-		// Add event listeners
 		window.addEventListener("mousemove", handleMouseMove);
 		window.addEventListener("resize", resizeCanvas);
 
-		// Start animation loop
 		animate();
 
-		// Cleanup on component unmount
 		return () => {
 			window.removeEventListener("mousemove", handleMouseMove);
 			window.removeEventListener("resize", resizeCanvas);
