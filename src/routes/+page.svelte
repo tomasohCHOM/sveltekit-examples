@@ -1,4 +1,5 @@
 <script>
+	import Starfield from "$lib/starfield.svelte";
 	const links = [
 		{ href: "/tictactoe", title: "Tic Tac Toe", desc: "finished example from the workshop" },
 		{ href: "/devdle", title: "Devdle", desc: "fully animated programming-based Wordle" },
@@ -17,6 +18,8 @@
 	/>
 	<title>FullyHacks 2025 SvelteKit Workshop</title>
 </svelte:head>
+
+<Starfield />
 
 <main class="mx-auto flex max-w-[1536px] flex-col gap-6 px-8 py-16 md:gap-8 md:px-16 md:py-24">
 	<h1 class="text-3xl font-semibold md:text-5xl">SvelteKit Examples</h1>
@@ -52,9 +55,9 @@
 
 <style>
 	:root {
-		--color-background-500: #f8f8f8;
-		--color-background-300: #d1d5dc;
-		--color-foreground: #1f2125;
+		--color-background-500: rgb(248, 248, 248);
+		--color-background-300: rgb(209, 213, 220);
+		--color-foreground: rgb(31, 33, 37);
 
 		background-color: var(--color-background-500);
 		color: var(--color-foreground);
@@ -62,9 +65,9 @@
 
 	@media (prefers-color-scheme: dark) {
 		:root {
-			--color-background-500: #1f2125;
-			--color-background-300: #77797a;
-			--color-foreground: #ffffff;
+			--color-background-500: rgb(31, 33, 37);
+			--color-background-300: rgb(119, 121, 122);
+			--color-foreground: rgb(255, 255, 255);
 		}
 	}
 
