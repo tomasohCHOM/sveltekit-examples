@@ -42,9 +42,9 @@ To install Daisylang, follow these steps:
 
 ## Hello, World
 
-Let's start with a simple program that prints `Hello, World!` to the console.
+Let's start with a simple program that prints Hello, World! to the console.
 
-```daisy
+```go
 io.out("Hello, World!")
 ```
 
@@ -58,7 +58,7 @@ daisy run hello.daisy
 
 Daisylang supports both single-line and multi-line comments:
 
-```daisy
+```go
 # This is a single-line comment
 
 #* This is a
@@ -69,7 +69,7 @@ Daisylang supports both single-line and multi-line comments:
 
 Daisylang provides a range of built-in types:
 
-```daisy
+```go
 number: int32 = 5
 big_num: uint64 = 1
 decimal: flt32 = 0.4
@@ -79,13 +79,13 @@ c: char = "😖" # Unicode character
 array: [3]int32 = {1, 2, 3} # Fixed-size array
 ```
 
-Strings could be implemented as arrays of `char` with an associated length field.
+Strings could be implemented as arrays of char with an associated length field.
 
 ## Type Inference
 
-Daisylang supports type inference using `:=`:
+Daisylang supports type inference using :=:
 
-```daisy
+```go
 a := 5  # Automatically inferred as int32
 ```
 
@@ -93,7 +93,7 @@ a := 5  # Automatically inferred as int32
 
 Functions are first-class citizens in Daisylang:
 
-```daisy
+```go
 f: func(param1: int32, param2: flt64) (bool) {
   return true
 }
@@ -103,7 +103,7 @@ f: func(param1: int32, param2: flt64) (bool) {
 
 Daisylang supports struct-like types with methods:
 
-```daisy
+```go
 my_type: type {
   a: int32
   b: str
@@ -118,7 +118,7 @@ my_method: my_type::func() () {
 
 Daisylang provides basic arithmetic operations:
 
-```daisy
+```go
 a + b  # Addition
 b - a  # Subtraction
 a * b  # Multiplication
@@ -129,7 +129,7 @@ a % b  # Modulus
 
 ## Logical Operators
 
-```daisy
+```go
 a == b  # Equal
 a != b  # Not equal
 a <= b  # Less than or equal
@@ -140,14 +140,14 @@ a >= b  # Greater than or equal
 
 Daisylang supports formatted strings:
 
-```daisy
+```go
 name: str = "bob"
 hello: str = fmt"hello, {name}"
 ```
 
 ## String Manipulation
 
-```daisy
+```go
 hello = "hi" + name  # Concatenation
 ```
 
@@ -155,15 +155,15 @@ hello = "hi" + name  # Concatenation
 
 ## Imports and Modules
 
-Modules can be imported using the `import` keyword:
+Modules can be imported using the import keyword:
 
-```daisy
+```go
 import "io" "mem"
 ```
 
 ## Input/Output
 
-```daisy
+```go
 io.out("hi mom") # Print to stdout
 input: str = io.in("what's your name?") # Read input
 io.err("nooo\n") # Print to stderr
@@ -175,9 +175,9 @@ io.close(file)
 
 ## RAII and Memory Management
 
-Daisylang supports RAII-style resource management using `defer`:
+Daisylang supports RAII-style resource management using defer:
 
-```daisy
+```go
 {
   ptr: int = mem.alloc(10) # Allocate memory
   defer mem.free(ptr) # Free memory at end of scope
@@ -187,7 +187,7 @@ Daisylang supports RAII-style resource management using `defer`:
 
 File handling example:
 
-```daisy
+```go
 {
   my_file: file = io.open("filename")
   defer io.close(file)

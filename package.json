@@ -38,6 +38,7 @@
 	"dependencies": {
 		"@threlte/core": "^8.0.1",
 		"@threlte/extras": "^9.1.0",
+		"shiki": "^3.2.2",
 		"three": "^0.175.0"
 	}
 }
